@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <header>
+        <h1 id="title">Programming Survey Form</h1>
+        <p id="description">How you interact with programming daily</p>
+    </header>
+    <video autoplay muted loop id="myVideo">
+        <source src="video.mp4" type="video/mp4">
+    </video>
+    <main id="main">
+        <div id="survey-form">
+            <div class="input-group">
+                <label for="name" id="name-label">Subject</label>
+                <input type="text" name="name" value="some-value" id="name" placeholder="Enter your name" required>
+            </div>
+            <div class="input-group"><label for="email" id="email-label">Recipient email</label><input type="email"
+                    name="email" id="email" placeholder="Enter your email" required></div>
+        </div>
+
+        <div class="input-group">
+            <p>Any additional information you want to provide?</p>
+            <label for="textarea">
+                <textarea name="description" id="textarea" cols="30" rows="10"
+                    disabled>these are some message text to be sent</textarea>
+            </label>
+        </div>
+        <div class="input-group">
+            <button id="submit">Ready</button>
+            <a href="submit" id="submit-link">Send Mail</a>
+        </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function readyFn() {
+                $('#submit').on('click', function () {
+                    let subjectVal = $('#name').val();
+                    let recipientEmail = $('#email').val();
+                    let message = $('#textarea').val();
+
+
+                    let submitLink = $('submit-link');
+                    if (subjectVal == '') {
+                        alert('Please enter subject');
+                        return;
+                    } else if (recipientEmail == '') {
+                        alert('Please enter recipient address');
+                        return;
+                    }
+                    let hrefAttr = `mailto:${recipientEmail}?subject=${subjectVal}&body=${message}`;
+                    $("#submit").css('visibility', 'hidden');
+                    $('#submit-link').css('visibility', 'visible');
+                    $('#submit-link').attr('href', hrefAttr);
+                });
+            });
+        </script>
+    </main>
+</body>
+
+</html>
